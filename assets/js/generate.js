@@ -29,9 +29,9 @@ document.getElementById("recipeForm").addEventListener("submit", function (event
         let ingredients = recipe.ingredients.map((ingredient) => ingredient.text);
 
         // Display recipe details
-        const recipeContainer = document.getElementById("recipeContainer");
+        const recipeDetails = document.getElementById("recipeDetails");
         const nutrients = recipe.totalNutrients;
-        recipeContainer.innerHTML = `
+        recipeDetails.innerHTML = `
             <h3>${recipe.label}</h3>
             <ul>${ingredients.map((item) => `<li>${item}</li>`).join("")}</ul>
             <p><strong>Calories:</strong> ${Math.round(recipe.calories)}</p>
@@ -44,6 +44,7 @@ document.getElementById("recipeForm").addEventListener("submit", function (event
             </ul>
             <img src="${recipe.image}" id="recipeImage" style="width: ${imageSize}px; display: block;" />
         `;
+        document.getElementById("recipeContainer").style.display = "block";
       } else {
         alert("No recipes found for the provided name and parameters.");
       }

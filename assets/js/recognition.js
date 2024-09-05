@@ -11,8 +11,12 @@ document.getElementById("imageRecognitionForm").addEventListener("submit", funct
   if (uploadImage) {
     let reader = new FileReader();
     reader.onload = function (e) {
-      document.getElementById("recognizedImage").src = e.target.result;
-      document.getElementById("recognizedImage").style.display = "block";
+      let outputDiv = document.getElementById("imageRecognitionOutput");
+      let nameDiv = document.getElementById("recognizedRecipeName");
+      let image = document.getElementById("recognizedImage");
+      outputDiv.style.display = "none";
+      image.src = e.target.result;
+      image.style.maxWidth = "500px";
 
       // Perform image recognition using Clarifai
       const raw = JSON.stringify({
@@ -47,8 +51,9 @@ document.getElementById("imageRecognitionForm").addEventListener("submit", funct
             let recipeName = concepts[0].name; // Adjust based on actual response
             recipeName = recipeName.charAt(0).toUpperCase() + recipeName.slice(1);
 
-            document.getElementById("recognizedRecipeName").innerText = recipeName;
-            document.getElementById("imageRecognitionOutput").style.display = "block";
+            nameDiv.innerText = recipeName;
+            outputDiv.style.display = "block";
+            image.style.display = "block";
           } else {
             alert("No recognizable items found in the image.");
           }
