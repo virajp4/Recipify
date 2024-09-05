@@ -11,12 +11,18 @@ const logoutButton = document.getElementById("logoutButton");
 const loginForm = document.getElementById("loginForm");
 const signupForm = document.getElementById("signupForm");
 
+const navItems = document.querySelectorAll(".nav-item");
+
 document.addEventListener("DOMContentLoaded", function () {
   const loginButton = document.getElementById("loginButton");
   const signupButton = document.getElementById("signupButton");
   const logoutButton = document.getElementById("logoutButton");
   const isLoggedIn = localStorage.getItem("isLoggedIn");
+  
   if (isLoggedIn) {
+    navItems.forEach((item, idx) => {
+      if (idx == 1 || idx == 2) item.style.display = "block";
+    });
     if (loginButton) loginButton.style.display = "none";
     if (signupButton) signupButton.style.display = "none";
     if (logoutButton) logoutButton.style.display = "block";
