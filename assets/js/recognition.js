@@ -4,6 +4,8 @@ const APP_ID = "main";
 const MODEL_ID = "food-item-recognition";
 const MODEL_VERSION_ID = "1d5fd481e0cf4826aa72ec3ff049e044";
 
+const CORS_PROXY = "https://cors-anywhere.herokuapp.com/";
+
 document.getElementById("imageRecognitionForm").addEventListener("submit", function (event) {
   event.preventDefault();
   let uploadImage = document.getElementById("uploadImage").files[0];
@@ -35,7 +37,7 @@ document.getElementById("imageRecognitionForm").addEventListener("submit", funct
         ],
       });
 
-      fetch("https://api.clarifai.com/v2/models/" + MODEL_ID + "/versions/" + MODEL_VERSION_ID + "/outputs", {
+      fetch(CORS_PROXY + "https://api.clarifai.com/v2/models/" + MODEL_ID + "/versions/" + MODEL_VERSION_ID + "/outputs", {
         method: "POST",
         headers: {
           Accept: "application/json",
