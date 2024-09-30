@@ -32,17 +32,30 @@ document.getElementById("recipeForm").addEventListener("submit", function (event
         const recipeDetails = document.getElementById("recipeDetails");
         const nutrients = recipe.totalNutrients;
         recipeDetails.innerHTML = `
-            <h3>${recipe.label}</h3>
-            <ul>${ingredients.map((item) => `<li>${item}</li>`).join("")}</ul>
-            <p><strong>Calories:</strong> ${Math.round(recipe.calories)}</p>
-            <p><strong>Nutrients:</strong></p>
-            <ul>
-                <li><strong>Calcium:</strong> ${nutrients.CA ? nutrients.CA.quantity + " " + nutrients.CA.unit : "N/A"}</li>
-                <li><strong>Magnesium:</strong> ${nutrients.MG ? nutrients.MG.quantity + " " + nutrients.MG.unit : "N/A"}</li>
-                <li><strong>Sodium:</strong> ${nutrients.NA ? nutrients.NA.quantity + " " + nutrients.NA.unit : "N/A"}</li>
-                <li><strong>Vitamin D:</strong> ${nutrients.VITD ? nutrients.VITD.quantity + " " + nutrients.VITD.unit : "N/A"}</li>
-            </ul>
-            <img src="${recipe.image}" id="recipeImage" style="width: ${imageSize}px; display: block;" />
+            <div class="recipe-details">
+              <h3>${recipe.label}</h3>
+              <h4>Ingredients:</h4>
+              <ul>${ingredients.map((item) => `<li>${item}</li>`).join("")}</ul>
+              <h4>Instructions:</h4>
+              <a href="${recipe.url}" target="_blank">View full recipe</a>
+              <h4>Calories: ${Math.round(recipe.calories)}</h4>
+              <h4>Nutrients:</h4>
+              <div class="nutrient-list">
+                  <span class="nutrient-item"><strong>Calcium:</strong> ${
+                    nutrients.CA ? Math.round(nutrients.CA.quantity) + " " + nutrients.CA.unit : "N/A"
+                  }</span>
+                  <span class="nutrient-item"><strong>Magnesium:</strong> ${
+                    nutrients.MG ? Math.round(nutrients.MG.quantity) + " " + nutrients.MG.unit : "N/A"
+                  }</span>
+                  <span class="nutrient-item"><strong>Sodium:</strong> ${
+                    nutrients.NA ? Math.round(nutrients.NA.quantity) + " " + nutrients.NA.unit : "N/A"
+                  }</span>
+                  <span class="nutrient-item"><strong>Vitamin D:</strong> ${
+                    nutrients.VITD ? Math.round(nutrients.VITD.quantity) + " " + nutrients.VITD.unit : "N/A"
+                  }</span>
+              </div>
+              <img src="${recipe.image}" alt="${recipe.label}" style="width: ${imageSize}px;" />
+            </div>
         `;
         document.getElementById("recipeContainer").style.display = "block";
       } else {
